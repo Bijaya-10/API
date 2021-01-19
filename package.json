@@ -1,0 +1,28 @@
+{
+  "name": "myassignment",
+  "version": "1.0.0",
+  "description": "project",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.0.0",
+    "brcypt": "^1.0.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "mongoose": "^5.11.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwarica-github/t2---backend-api-Bijaya-10.git"
+  },
+  "author": "bijaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/softwarica-github/t2---backend-api-Bijaya-10/issues"
+  },
+  "homepage": "https://github.com/softwarica-github/t2---backend-api-Bijaya-10#readme"
+}
