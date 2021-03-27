@@ -8,6 +8,9 @@ const order = mongoose.model("order",{
     },
     Customer_Book: {
         type : String
+    },
+    Customer_Address: {
+        type : String
     }
 })
 module.exports = order

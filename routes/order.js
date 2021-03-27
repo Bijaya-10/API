@@ -17,7 +17,8 @@ router.post("/order/insert", function(req, res){
     const Customer_Name= req.body.Customer_Name;
     const Customer_Email = req.body.Customer_Email;
     const Customer_Book = req.body.Customer_Book;
-    const data = new order({Customer_Name:Customer_Name, Customer_Email:Customer_Email, Customer_Book: Customer_Book});
+    Customer_Address = Customer_Address
+    const data = new order({Customer_Name:Customer_Name, Customer_Email:Customer_Email, Customer_Address:Customer_Address, Customer_Book: Customer_Book});
     data.save();
     res.send("inserted")
 
