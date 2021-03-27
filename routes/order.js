@@ -84,7 +84,8 @@ router.put("/order/update/:id", function(req, res){
     const Customer_Book = req.body.Customer_Book
     const Customer_Name = req.body.Customer_Name
     const Customer_Email = req.body.Customer_Email
-    order.updateOne({_id:id},{Customer_Email:Customer_Email, Customer_Name:Customer_Name, Customer_Book:Customer_Book}).then(function(){
+    const Customer_Address = req.body.Customer_Address
+    order.updateOne({_id:id},{Customer_Email:Customer_Email,Customer_Address, Customer_Name:Customer_Name, Customer_Book:Customer_Book}).then(function(){
         res.send("updated")
     })
 
