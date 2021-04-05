@@ -41,7 +41,7 @@ router.get("/comment/fetch", function(req, res){
 
 
 router.get("/comment/showall", function(req,res){
-    product.find().then(function(productdata){
+    comment.find().then(function(productdata){
     const Book_Name = productdata.Book_Name;
     
         res.status(200).json({
