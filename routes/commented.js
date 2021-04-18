@@ -60,7 +60,7 @@ router.get("/comment/showall", function(req,res){
 
 router.get("/comment/fetch/single/:id", function(req,res){
 const id = req.params.id;
-product.findOne({_id : id})
+comment.findOne({_id : id})
 .then(function(data){
 res.status(200).json(data)
 })
@@ -86,7 +86,7 @@ router.delete("/comment/delete/:id",function(req, res){
     // authenticate_cus.verifyAdmin, authenticate_cus.verifyUser, 
  const id = req.params.id;
  console.log(id)
-    product.deleteOne({_id:id})
+    comment.deleteOne({_id:id})
 
 
         .then(function(result){
@@ -120,7 +120,7 @@ router.put("/comment/update/:id", function(req, res){
     const Book_Name = req.body.Book_Name
     const Book_Number = req.body.Book_Number
 
-    product.updateOne({_id:id},{Book_Name:Book_Name,Book_Number: Book_Number}).then(function(){
+    comment.updateOne({_id:id},{Book_Name:Book_Name,Book_Number: Book_Number}).then(function(){
         res.send()
         .then(function(result){
             res.status(201).json({message: "updated", success : true})

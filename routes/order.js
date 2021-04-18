@@ -21,8 +21,8 @@ router.post("/order/insert", photoupload.single('Book_Image'),function(req, res)
     const Customer_Address = req.body.Customer_Address;
     const data = new order({Customer_Name:Customer_Name, Customer_Email: Customer_Email, Customer_Book:Customer_Book,Customer_Address:Customer_Address});
     data.save()
-    .then(function(result){
-        res.status(201).json({message: "inserted", success : true})
+    .then(function(data){
+        res.status(201).json({message: "inserted", success : true, data})
     })
 
     .catch(function(e){
@@ -32,8 +32,72 @@ router.post("/order/insert", photoupload.single('Book_Image'),function(req, res)
 
 })
 
-router.get("/product/fetch", function(req, res){
-    product.find().
+
+
+
+// router.post("/image/:id", photoupload.single('Book_Image'),function(req, res){
+
+
+//     const Book_Image= req.file.filename;
+//       const data = new product({Book_Image,data:Book_Image});
+//       data.save()
+  
+//       if(req.file == undefined){
+//           return res.status(400).json
+//           ({
+//               message : "invalid image"
+//           })
+         
+  
+//           .then(function(result){
+//               res.status(201).json({message: "inserted", success : true})
+//           })
+      
+//           .catch(function(e){
+//               console.log(e)
+//               res.status(500).json({message : e.message, success : false})
+      
+//           })
+//       }
+      
+  
+//       })
+
+
+
+      router.post('/image/:id',photoupload.single('Book_Image'), function (req, res) {
+        
+    
+        if (req.file === undefined) {
+            return res.status(500).json({
+                message: 'invalid image'
+            })
+        }
+        const book = req.file.filename;
+       
+        order.findByIdAndUpdate({
+                _id: req.params.id
+            }, {
+                Book_Image: book
+            })
+     
+            .then(function (data) {
+                res.status(201).json({data,
+                    success: true,
+                    data:data
+                })
+            })
+            .catch(function (e) {
+                res.status(404).json({
+                    message: "Invalid image",
+                    success: false
+                })
+     
+            })
+    })
+
+router.get("/order/fetch", function(req, res){
+    order.find().
     then(function(ProductData){
         res.status(200).json({success:true,data:ProductData});
 
@@ -42,8 +106,8 @@ router.get("/product/fetch", function(req, res){
     })
 
 
-router.get("/product/showall", function(req,res){
-    product.find().then(function(productdata){
+router.get("/order/showall", function(req,res){
+    order.find().then(function(productdata){
     const Book_Name = productdata.Book_Name;
     
         res.status(200).json({
@@ -60,9 +124,9 @@ router.get("/product/showall", function(req,res){
 })
 
 
-router.get("/product/fetch/single/:id", function(req,res){
+router.get("/order/fetch/single/:id", function(req,res){
 const id = req.params.id;
-product.findOne({_id : id})
+order.findOne({_id : id})
 .then(function(data){
 res.status(200).json(data)
 })
@@ -84,11 +148,11 @@ res.status(500).json({error:e})
 
 //for delete
 
-router.delete("/product/delete/:id",function(req, res){
+router.delete("/order/delete/:id",function(req, res){
     // authenticate_cus.verifyAdmin, authenticate_cus.verifyUser, 
  const id = req.params.id;
  console.log(id)
-    product.deleteOne({_id:id})
+    order.deleteOne({_id:id})
 
 
         .then(function(result){
@@ -117,25 +181,19 @@ router.delete("/product/delete/:id",function(req, res){
 
 
 
-router.put("/product/update/:id", function(req, res){
+router.put("/order/update/:id", function(req, res){
     const id = req.params.id;
-    const Book_Name = req.body.Book_Name
-    const Book_Number = req.body.Book_Number
+    const Customer_Name = req.body.Customer_Name
+    const Customer_Email = req.body.Customer_Email
+    const Customer_Address = req.body.Customer_Address
+    const Customer_Book = req.body.Customer_Book
 
-    product.updateOne({_id:id},{Book_Name:Book_Name,Book_Number: Book_Number}).then(function(){
-        res.send()
-        .then(function(result){
-            res.status(201).json({message: "updated", success : true})
-        })
-    
-        .catch(function(e){
-            res.status(500).json({message : e.message, success : false})
-    
-        })
+
+    order.findByIdAndUpdate({_id:id},{Customer_Name:Customer_Name,Customer_Book:Customer_Book,Customer_Email:Customer_Email,Customer_Address:Customer_Address}).then((data)=>{
+        res.status(200).json({success:true,message:"Updated"})
     })
-
-    
 })
+    
 
 
 

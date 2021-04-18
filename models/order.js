@@ -11,6 +11,10 @@ const order = mongoose.model("order",{
     },
     Customer_Address: {
         type : String
+    },
+    Book_Image:{
+        type : String
     }
+
 })
 module.exports = order

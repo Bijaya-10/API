@@ -24,11 +24,19 @@ router.post("/product/insert", photoupload.single('Book_Image'),function(req, re
     })
 
     .catch(function(e){
+        console.log(e)
         res.status(500).json({message : e.message, success : false})
 
     })
 
 })
+
+
+
+    
+
+
+
 
 router.get("/product/fetch", function(req, res){
     product.find().
@@ -38,6 +46,25 @@ router.get("/product/fetch", function(req, res){
     })
 
     })
+
+    router.get('/product/data',async (req,res)=>{
+        try{
+            const product = await Product.find({addedby: req.Customer._id})
+            res.status(201).json({success: true, count: product.length, data: product})
+        }
+        catch(err) {
+            res.status(500).json({ message: "error: " + err})
+        }
+    })
+
+
+
+
+
+
+
+
+
 
 
 router.get("/product/showall", function(req,res){
